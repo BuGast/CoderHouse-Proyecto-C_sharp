@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace _1_Entrega
 {
-    internal class ProductoVendido
+    public class ProductoVendido
     {
-        private int _id;
-        private int _idProducto;
-        private int _stock;
-        private int _idVenta;
+        public int Id { get; set; }
+        public int Stock { get; set; }
+        public int IdProducto { get; set; }
+        public int IdVenta { get; set; }
     }
 }

@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace _1_Entrega
 {
-    internal class Producto
+    public class Producto
     {
-        private int _id;
-        private string _descripcion;
-        private float _costo;
-        private float _precioVenta;
-        private int _stock;
-        private int _idUsuario;
+        public int Id { get; set; }
+        public string Descripciones { get; set; }
+        public double Costo { get; set; }
+        public double PrecioVenta { get; set; }
+        public int Stock { get; set; }
+        public int IdUsuario { get; set; }
     }
-
 
 }

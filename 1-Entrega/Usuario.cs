@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace _1_Entrega
 {
-    internal class Usuario
+    public class Usuario
     {
-        private int _id;
-        private string _nombre;
-        private string _apellido;
-        private string _nombreUsuario;
-        private string _contraseña;
-        private string _email;
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Contraseña { get; set; }
+        public string Mail { get; set; }
     }
 }
