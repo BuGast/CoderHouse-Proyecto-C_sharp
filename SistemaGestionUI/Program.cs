@@ -1,7 +1,8 @@
-﻿using _1_Entrega;
+﻿using SistemaGestionEntities;
+using SistemaGestionData;
+using SistemaGestionBussiness;
 
 Menu();
-
 void Menu()
 {
     Console.WriteLine("-----------------------------------------" +
@@ -12,7 +13,7 @@ void Menu()
                     "\n 4: Menu ProductoVendido" +
                     "\n 5: Salir" +
                     "\n-----------------------------------------");
-string op = Console.ReadLine();
+    string op = Console.ReadLine();
     switch (op)
     {
         case "1":
@@ -81,11 +82,12 @@ void MenuProducto()
             break;
     }
 }
-void MostrarUnProducto() {
+void MostrarUnProducto()
+{
 
     Console.WriteLine("Ingrese un id para mostrar el producto respectivo");
     int Id = Convert.ToInt16(Console.ReadLine());
-    List<Producto> productos = ProductoData.ObtenerProducto(Id);
+    List<Producto> productos = ProductoBusiness.ObtenerProducto(Id);
 
     foreach (var producto in productos)
     {
@@ -99,7 +101,7 @@ void MostrarUnProducto() {
 }
 void MostrarProductos()
 {
-    List<Producto> productos = ProductoData.ListarProductos();
+    List<Producto> productos = ProductoBusiness.ListarProductos();
 
 
     foreach (var producto in productos)
@@ -131,7 +133,7 @@ void AltaProducto()
     Console.Write("Ingrese el ID de usuario asociado al producto: ");
     producto.IdUsuario = Convert.ToInt32(Console.ReadLine());
 
-    ProductoData.CrearProducto(producto);
+    ProductoBusiness.CrearProducto(producto);
     Console.WriteLine("Se creo el producto");
 }
 void ModificarProducto()
@@ -139,7 +141,7 @@ void ModificarProducto()
     Console.WriteLine("Ingrese la ID del producto que desea modificar:");
     if (int.TryParse(Console.ReadLine(), out int idProductoAModificar))
     {
-        List<Producto> productoExistente = ProductoData.ObtenerProducto(idProductoAModificar);
+        List<Producto> productoExistente = ProductoBusiness.ObtenerProducto(idProductoAModificar);
 
         if (productoExistente.Count > 0)
         {
@@ -168,7 +170,7 @@ void ModificarProducto()
                                 IdUsuario = nuevaIdUsuario
                             };
 
-                            ProductoData.ModificarProducto(productoModificado);
+                            ProductoBusiness.ModificarProducto(productoModificado);
                             Console.WriteLine("Producto modificado con éxito.");
                         }
                         else
@@ -206,7 +208,7 @@ void BajaProducto()
     Console.WriteLine("Ingrese la ID del producto que desea eliminar:");
     if (int.TryParse(Console.ReadLine(), out int idProductoAEliminar))
     {
-        List<Producto> productoExistente = ProductoData.ObtenerProducto(idProductoAEliminar);
+        List<Producto> productoExistente = ProductoBusiness.ObtenerProducto(idProductoAEliminar);
 
         if (productoExistente.Count > 0)
         {
@@ -217,7 +219,7 @@ void BajaProducto()
             {
                 Producto productoAEliminar = new Producto { Id = idProductoAEliminar };
 
-                ProductoData.EliminarProducto(productoAEliminar);
+                ProductoBusiness.EliminarProducto(productoAEliminar);
                 Console.WriteLine("Producto eliminado con éxito.");
             }
             else
@@ -285,7 +287,7 @@ void MostrarUnUsuario()
 {
     Console.WriteLine("Ingrese un ID para mostrar el usuario respectivo");
     int Id = Convert.ToInt16(Console.ReadLine());
-    List<Usuario> usuarios = UsuarioData.ObtenerUsuario(Id);
+    List<Usuario> usuarios = UsuarioBusiness.ObtenerUsuario(Id);
 
     foreach (var usuario in usuarios)
     {
@@ -299,7 +301,7 @@ void MostrarUnUsuario()
 }
 void MostrarUsuarios()
 {
-    List<Usuario> usuarios = UsuarioData.ListarUsuarios();
+    List<Usuario> usuarios = UsuarioBusiness.ListarUsuarios();
 
     foreach (var usuario in usuarios)
     {
@@ -330,7 +332,7 @@ void AltaUsuario()
     Console.Write("Ingrese el correo electrónico del usuario: ");
     usuario.Mail = Console.ReadLine();
 
-    UsuarioData.CrearUsuario(usuario);
+    UsuarioBusiness.CrearUsuario(usuario);
     Console.WriteLine("Se creó el usuario con éxito.");
 }
 void ModificarUsuario()
@@ -338,7 +340,7 @@ void ModificarUsuario()
     Console.WriteLine("Ingrese la ID del usuario que desea modificar:");
     if (int.TryParse(Console.ReadLine(), out int idUsuarioAModificar))
     {
-        List<Usuario> usuarioExistente = UsuarioData.ObtenerUsuario(idUsuarioAModificar);
+        List<Usuario> usuarioExistente = UsuarioBusiness.ObtenerUsuario(idUsuarioAModificar);
 
         if (usuarioExistente.Count > 0)
         {
@@ -367,7 +369,7 @@ void ModificarUsuario()
                 Mail = nuevoMail
             };
 
-            UsuarioData.ModificarUsuario(usuarioModificado);
+            UsuarioBusiness.ModificarUsuario(usuarioModificado);
             Console.WriteLine("Usuario modificado con éxito.");
         }
         else
@@ -385,7 +387,7 @@ void BajaUsuario()
     Console.WriteLine("Ingrese la ID del usuario que desea eliminar:");
     if (int.TryParse(Console.ReadLine(), out int idUsuarioAEliminar))
     {
-        List<Usuario> usuarioExistente = UsuarioData.ObtenerUsuario(idUsuarioAEliminar);
+        List<Usuario> usuarioExistente = UsuarioBusiness.ObtenerUsuario(idUsuarioAEliminar);
 
         if (usuarioExistente.Count > 0)
         {
@@ -396,7 +398,7 @@ void BajaUsuario()
             {
                 Usuario usuarioAEliminar = new Usuario { Id = idUsuarioAEliminar };
 
-                UsuarioData.EliminarUsuario(usuarioAEliminar);
+                UsuarioBusiness.EliminarUsuario(usuarioAEliminar);
                 Console.WriteLine("Usuario eliminado con éxito.");
             }
             else
@@ -464,7 +466,7 @@ void MostrarUnaVenta()
 {
     Console.WriteLine("Ingrese un ID para mostrar la venta respectiva");
     int Id = Convert.ToInt16(Console.ReadLine());
-    List<Venta> ventas = VentaData.ObtenerVenta(Id);
+    List<Venta> ventas = VentaBusiness.ObtenerVenta(Id);
 
     foreach (var venta in ventas)
     {
@@ -475,7 +477,7 @@ void MostrarUnaVenta()
 }
 void MostrarVentas()
 {
-    List<Venta> ventas = VentaData.ListarVenta();
+    List<Venta> ventas = VentaBusiness.ListarVenta();
 
     foreach (var venta in ventas)
     {
@@ -494,7 +496,7 @@ void AltaVenta()
     Console.Write("Ingrese el ID de usuario asociado a la venta: ");
     venta.IdUsuario = Convert.ToInt32(Console.ReadLine());
 
-    VentaData.CrearVenta(venta);
+    VentaBusiness.CrearVenta(venta);
     Console.WriteLine("Se creó la venta con éxito.");
 }
 void ModificarVenta()
@@ -502,7 +504,7 @@ void ModificarVenta()
     Console.WriteLine("Ingrese la ID de la venta que desea modificar:");
     if (int.TryParse(Console.ReadLine(), out int idVentaAModificar))
     {
-        List<Venta> ventaExistente = VentaData.ObtenerVenta(idVentaAModificar);
+        List<Venta> ventaExistente = VentaBusiness.ObtenerVenta(idVentaAModificar);
 
         if (ventaExistente.Count > 0)
         {
@@ -519,7 +521,7 @@ void ModificarVenta()
                     IdUsuario = nuevoIdUsuario
                 };
 
-                VentaData.ModificarVenta(ventaModificada);
+                VentaBusiness.ModificarVenta(ventaModificada);
                 Console.WriteLine("Venta modificada con éxito.");
             }
             else
@@ -542,7 +544,7 @@ void BajaVenta()
     Console.WriteLine("Ingrese la ID de la venta que desea eliminar:");
     if (int.TryParse(Console.ReadLine(), out int idVentaAEliminar))
     {
-        List<Venta> ventaExistente = VentaData.ObtenerVenta(idVentaAEliminar);
+        List<Venta> ventaExistente = VentaBusiness.ObtenerVenta(idVentaAEliminar);
 
         if (ventaExistente.Count > 0)
         {
@@ -553,7 +555,7 @@ void BajaVenta()
             {
                 Venta ventaAEliminar = new Venta { Id = idVentaAEliminar };
 
-                VentaData.EliminarVenta(ventaAEliminar);
+                VentaBusiness.EliminarVenta(ventaAEliminar);
                 Console.WriteLine("Venta eliminada con éxito.");
             }
             else
@@ -621,7 +623,7 @@ void MostrarProductoVendido()
 {
     Console.WriteLine("Ingrese un ID para mostrar el Producto Vendido respectivo:");
     int Id = Convert.ToInt32(Console.ReadLine());
-    List<ProductoVendido> productosVendidos = ProductoVendidoData.ObtenerProductoVendido(Id);
+    List<ProductoVendido> productosVendidos = ProductoVendidoBusiness.ObtenerProductoVendido(Id);
 
     foreach (var productoVendido in productosVendidos)
     {
@@ -633,7 +635,7 @@ void MostrarProductoVendido()
 }
 void MostrarProductosVendidos()
 {
-    List<ProductoVendido> productosVendidos = ProductoVendidoData.ListarProductoVendido();
+    List<ProductoVendido> productosVendidos = ProductoVendidoBusiness.ListarProductoVendido();
 
     foreach (var productoVendido in productosVendidos)
     {
@@ -656,7 +658,7 @@ void AltaProductoVendido()
     Console.Write("Ingrese el ID de la Venta: ");
     productoVendido.IdVenta = Convert.ToInt32(Console.ReadLine());
 
-    ProductoVendidoData.CrearProductoVendido(productoVendido);
+    ProductoVendidoBusiness.CrearProductoVendido(productoVendido);
     Console.WriteLine("Se creó el Producto Vendido con éxito.");
 }
 void ModificarProductoVendido()
@@ -664,7 +666,7 @@ void ModificarProductoVendido()
     Console.WriteLine("Ingrese la ID del Producto Vendido que desea modificar:");
     if (int.TryParse(Console.ReadLine(), out int idProductoVendidoAModificar))
     {
-        List<ProductoVendido> productoVendidoExistente = ProductoVendidoData.ObtenerProductoVendido(idProductoVendidoAModificar);
+        List<ProductoVendido> productoVendidoExistente = ProductoVendidoBusiness.ObtenerProductoVendido(idProductoVendidoAModificar);
 
         if (productoVendidoExistente.Count > 0)
         {
@@ -685,7 +687,7 @@ void ModificarProductoVendido()
                 IdVenta = nuevoIdVenta
             };
 
-            ProductoVendidoData.ModificarProductoVendido(productoVendidoModificado);
+            ProductoVendidoBusiness.ModificarProductoVendido(productoVendidoModificado);
             Console.WriteLine("Producto Vendido modificado con éxito.");
         }
         else
@@ -703,7 +705,7 @@ void BajaProductoVendido()
     Console.WriteLine("Ingrese la ID del Producto Vendido que desea eliminar:");
     if (int.TryParse(Console.ReadLine(), out int idProductoVendidoAEliminar))
     {
-        List<ProductoVendido> productoVendidoExistente = ProductoVendidoData.ObtenerProductoVendido(idProductoVendidoAEliminar);
+        List<ProductoVendido> productoVendidoExistente = ProductoVendidoBusiness.ObtenerProductoVendido(idProductoVendidoAEliminar);
 
         if (productoVendidoExistente.Count > 0)
         {
@@ -714,7 +716,7 @@ void BajaProductoVendido()
             {
                 ProductoVendido productoVendidoAEliminar = new ProductoVendido { Id = idProductoVendidoAEliminar };
 
-                ProductoVendidoData.EliminarProductoVendido(productoVendidoAEliminar);
+                ProductoVendidoBusiness.EliminarProductoVendido(productoVendidoAEliminar);
                 Console.WriteLine("Producto Vendido eliminado con éxito.");
             }
             else
